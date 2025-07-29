@@ -1,0 +1,261 @@
+:root {
+            --primary: #D62828;
+            --secondary: #F77F00;
+            --accent: #606C38;
+            --background: #FAF3E0;
+            --text-primary: #2B2D42;
+            --text-secondary: #8D99AE;
+        }
+
+        body {
+           background-image: url(./assets/—Pngtree—restaurant\ food\ menu\ background_1046420.jpg);
+           background-size: cover;
+           background-repeat: no-repeat;
+           background-position: center;
+           background-attachment: fixed;
+           margin: 0%;
+           padding: 0%;
+           height: 100vh;
+           background-color: var(--background);
+           color: var(--text-primary);
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 2px 15px rgba(214, 40, 40, 0.3);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 8px 16px !important;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .search-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+        }
+
+        .search-input {
+            border: 2px solid var(--accent);
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(214, 40, 40, 0.25);
+        }
+
+        .category-section {
+            margin: 30px 0;
+        }
+
+        .category-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .menu-item {
+            background-image: url(./assets/spoons-with-powder-condiments-copy-space_23-2148601204.jpg);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 15px 0;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(214, 40, 40, 0.2);
+            border-color: var(--primary);
+        }
+
+        .menu-item h5 {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .menu-item p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .order-summary {
+            background: white;
+            border-radius: 131px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            position: relative;
+            top: 23vh;
+            left:12vh;
+        }
+
+        .order-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: var(--background);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .order-item-name {
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .order-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .remove-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-btn:hover {
+            background-color: #cc1f1f;
+        }
+
+        .total-section {
+            border-top: 2px solid var(--accent);
+            padding-top: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .total-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .clear-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(214, 40, 40, 0.3);
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .nav-link {
+                margin: 5px 0;
+            }
+            
+            .category-title {
+                font-size: 1.5rem;
+            }
+            
+            .order-summary {
+                position: static;
+                margin-top: 30px;
+            }
+        }

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice Palace - Indian Restaurant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet"  href="./style.css">
+</head>
+<body>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <img src="./assets/the-last-shuriken.regular.webp" alt="Restaurant Logo" class="img-fluid" style="width: 550px; height: 60px;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#starters" onclick="showCategory('starters', this)">Starters</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#main-course" onclick="showCategory('main-course', this)">Main Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Currys" onclick="showCategory('Currys', this)">Currys</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#Breads" onclick="showCategory('Breads', this)">Breads</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#desserts" onclick="showCategory('desserts', this)">Desserts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cool-drinks" onclick="showCategory('cool-drinks', this)">Cool Drinks</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Menu Section -->
+            <div class="col-lg-8">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="fas fa-search text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control search-input border-start-0" id="searchInput" 
+                               placeholder="Search for delicious dishes...">
+                    </div>
+                </div>
+
+                <!-- Menu Categories -->
+                <div id="menu-container">
+                    <!-- Starters -->
+                    <div class="category-section" id="starters">
+                        <h2 class="category-title">Starters</h2>
+                        <div class="row" id="starters-items"></div>
+                    </div>
+
+                    <!-- Main Course -->
+                    <div class="category-section" id="main-course" style="display: none;">
+                        <h2 class="category-title">Main Course</h2>
+                        <div class="row" id="main-course-items"></div>
+                    </div>
+                     <!-- Currys -->
+                    <div class="category-section" id="Currys" style="display: none;">
+                        <h2 class="category-title">Currys</h2>
+                        <div class="row" id="Currys-items"></div>
+                    </div>
+
+                    <!-- Breads -->
+                    <div class="category-section" id="Breads" style="display: none;">
+                        <h2 class="category-title">Breads</h2>
+                        <div class="row" id="Breads-items"></div>
+                    </div>
+
+                    <!-- Desserts -->
+                    <div class="category-section" id="desserts" style="display: none;">
+                        <h2 class="category-title">Desserts</h2>
+                        <div class="row" id="desserts-items"></div>
+                    </div>
+
+                    <!-- Cool Drinks -->
+                    <div class="category-section" id="cool-drinks" style="display: none;">
+                        <h2 class="category-title">Cool Drinks</h2>
+                        <div class="row" id="cool-drinks-items"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <div class="order-summary">
+                    <h3 class="order-title"><i class="fas fa-shopping-cart"></i> Your Order</h3>
+                    <div id="order-list">
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart fa-2x mb-2"></i>
+                            <p>Your cart is empty<br>Start adding some delicious items!</p>
+                        </div>
+                    </div>
+                    <div class="total-section">
+                        <div class="total-amount" id="total-amount">Total: ₹0</div>
+                        <button class="btn clear-btn" onclick="clearOrder()">
+                            <i class="fas fa-trash"></i> Clear Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Menu Data
+        const menuData = {
+            starters: [
+                { name: "Chicken 65", description: "Spicy deep-fried chicken appetizer", price: 320 },
+                { name: "Tandoori Chicken", description: "Marinated chicken cooked in clay oven", price: 350 },
+                { name: "Mutton Pepper Fry", description: "A simple, spicy dish where mutton is cooked with pepper and other spices.", price: 120 },
+                { name: "Mutton Ghee Roast", description: "Slow-cooked mutton with ghee and spices.", price: 350 },
+                { name: "Paneer Tikka", description: "Grilled cottage cheese with bell peppers and onions", price: 280 },
+                { name: "Vegetable Spring Rolls", description: "Crispy rolls filled with mixed vegetables", price: 150 },
+                { name: "Aloo Tikki", description: "Spiced potato patties served with chutneys", price: 90 },
+                { name: "Mushroom Manchurian", description: "Spiced mushroom fritters in tangy sauce", price: 90 },
+
+            ],
+            "main-course": [
+                { name: "Chicken Biryani", description: "Fragrant basmati rice with spiced chicken", price: 450 },
+                { name: "Mutton Biryani", description: "Royal basmati rice with tender mutton pieces", price: 550 },
+                { name : " Prawn Biryani", description: "Aromatic rice dish with succulent prawns", price: 600 },
+                { name : "Fish Biryani", description: "Delicious rice dish with spiced fish", price: 500 },
+                { name : "Chicken Mandi", description: "Aromatic rice dish with tender chicken pieces", price: 500 },
+                { name : "Mutton Mandi", description: "Fragrant rice dish with succulent mutton", price: 600 },
+                { name: "Veg Biryani", description: "Aromatic basmati rice with mixed vegetables", price: 400 },
+                {name:"Paneer Biryani", description: "Aromatic basmati rice with spiced paneer", price: 450 },
+                { name: "Mashroom Biryani", description: "Aromatic basmati rice with spiced mushrooms", price: 450 },
+                { name: "Jeera Rice", description: "Cumin flavored basmati rice", price: 180 }  
+            ],
+
+
+            Currys: [
+                { name: "Chicken Curry", description: "Spicy chicken curry with traditional spices", price: 400 },
+                { name: "Mutton Rogan Josh", description: "Slow-cooked mutton in rich gravy", price: 500 },
+                { name: "Butter Chicken", description: "Creamy tomato-based chicken curry", price: 380 },
+                { name: "Fish Curry", description: "Spicy fish curry with coconut milk", price: 450 },
+                { name: "Paneer Tikka Masala", description: "Grilled paneer in creamy tomato sauce", price: 350 },
+                { name: "Vegetable Korma", description: "Mixed vegetables in rich coconut gravy", price: 300 },
+                 { name: "Paneer Butter Masala", description: "Cottage cheese in rich tomato gravy", price: 350 },
+                { name: "Dal Tadka", description: "Yellow lentils tempered with spices", price: 200 },
+                { name: "Chole Bhature", description: "Spicy chickpeas served with deep-fried bread", price: 300 },
+                { name: "Palak Paneer", description: "Cottage cheese in spinach gravy", price: 280 },
+                { name: "Dal Makhani", description: "Rich and creamy black lentils", price: 220 },
+               
+            ],
+
+            Breads: [
+                { name: "Naan", description: "Fresh baked Indian bread", price: 60 },
+                { name: "Garlic Naan", description: "Naan topped with garlic and herbs", price: 80 },
+                { name: "Butter Naan", description: "Naan brushed with butter", price: 70 },
+                { name: "Aloo Paratha", description: "Stuffed potato bread", price: 100 },
+            ],
+
+            desserts: [
+                { name: "Gulab Jamun", description: "Sweet milk dumplings in sugar syrup", price: 120 },
+                { name: "Rasmalai", description: "Soft cottage cheese in sweet milk", price: 150 },
+                { name: "Kulfi", description: "Traditional Indian ice cream", price: 100 },
+                { name: "Kunafa", description: "Sweet pastry with nuts and syrup", price: 130 },
+                { name: "Jalebi", description: "Spiral-shaped sweet soaked in syrup", price: 110 },
+                { name: "Baklava", description: "Sweet pastry with layers of filo and nuts", price: 140 }
+            ],
+            "cool-drinks": [
+                { name: "Thumsup", description: "Popular Indian cola drink", price: 25 },
+                { name: "Sprite", description: "Lemon-lime flavored soda", price: 25 },
+                { name: "Lassi", description: "Yogurt-based drink", price: 30 },
+                { name: "Badam milk", description: "Almond-flavored milk drink", price: 30 },
+                { name: "Water bottle", description: "Bottled water", price: 20 },
+                { name: "Filter coffee", description: "Traditional South Indian coffee", price: 30 },
+                { name: "Masala chai", description: "Spiced Indian tea", price: 20 },  
+            ]
+        };
+
+        // Order state
+        let currentOrder = {};
+        let currentCategory = 'starters';
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMenuItems();
+            setupSearchFilter();
+            updateTotal();
+        });
+
+        // Render menu items for current category
+        function renderMenuItems() {
+            Object.keys(menuData).forEach(category => {
+                const container = document.getElementById(`${category}-items`);
+                container.innerHTML = '';
+                
+                menuData[category].forEach(item => {
+                    const menuItemHtml = `
+                        <div class="col-md-6 mb-3">
+                            <div class="menu-item" onclick="addToOrder('${item.name}', ${item.price})">
+                                <h5>${item.name}</h5>
+                                <p>${item.description}</p>
+                                <div class="price">₹${item.price}</div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += menuItemHtml;
+                });
+            });
+        }
+
+        // Show specific category
+        function showCategory(category, element) {
+            // Hide all categories
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected category
+            document.getElementById(category).style.display = 'block';
+            currentCategory = category;
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Add item to order
+        function addToOrder(name, price) {
+            if (currentOrder[name]) {
+                currentOrder[name].quantity += 1;
+            } else {
+                currentOrder[name] = { price: price, quantity: 1 };
+            }
+            updateOrderDisplay();
+            updateTotal();
+        }
+
+        // Update order display
+        function updateOrderDisplay() {
+            const orderList = document.getElementById('order-list');
+            
+            if (Object.keys(currentOrder).length === 0) {
+                orderList.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart fa-2x mb-2"></i>
+                        <p>Your cart is empty<br>Start adding some delicious items!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let orderHtml = '';
+            Object.keys(currentOrder).forEach(itemName => {
+                const item = currentOrder[itemName];
+                orderHtml += `
+                    <div class="order-item">
+                        <div>
+                            <div class="order-item-name">${itemName}</div>
+                            <div class="order-item-price">₹${item.price} × ${item.quantity}</div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="changeQuantity('${itemName}', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="changeQuantity('${itemName}', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="remove-btn ms-2" onclick="removeItem('${itemName}')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            orderList.innerHTML = orderHtml;
+        }
+
+        // Change item quantity
+        function changeQuantity(itemName, change) {
+            if (currentOrder[itemName]) {
+                currentOrder[itemName].quantity += change;
+                if (currentOrder[itemName].quantity <= 0) {
+                    delete currentOrder[itemName];
+                }
+                updateOrderDisplay();
+                updateTotal();
+            }
+        }
+
+        // Remove item from order
+        function removeItem(itemName) {
+            delete currentOrder[itemName];
+            updateOrderDisplay();
+            updateTotal();
+        }
+
+        // Calculate total
+        function calculateTotal() {
+            let total = 0;
+            Object.keys(currentOrder).forEach(itemName => {
+                const item = currentOrder[itemName];
+                total += item.price * item.quantity;
+            });
+            return total;
+        }
+
+        // Update total display
+        function updateTotal() {
+            const total = calculateTotal();
+            document.getElementById('total-amount').textContent = `Total: ₹${total}`;
+        }
+
+        // Clear entire order
+        function clearOrder() {
+            currentOrder = {};
+            updateOrderDisplay();
+            updateTotal();
+        }
+
+        // Setup search filter
+        function setupSearchFilter() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                filterMenuItems(searchTerm);
+            });
+        }
+
+        // Filter menu items based on search
+        function filterMenuItems(searchTerm) {
+            if (searchTerm === '') {
+                // Show all items when search is empty
+                renderMenuItems();
+                return;
+            }
+
+            Object.keys(menuData).forEach(category => {
+                const container = document.getElementById(`${category}-items`);
+                container.innerHTML = '';
+                
+                const filteredItems = menuData[category].filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) || 
+                    item.description.toLowerCase().includes(searchTerm)
+                );
+                
+                filteredItems.forEach(item => {
+                    const menuItemHtml = `
+                        <div class="col-md-6 mb-3">
+                            <div class="menu-item" onclick="addToOrder('${item.name}', ${item.price})">
+                                <h5>${item.name}</h5>
+                                <p>${item.description}</p>
+                                <div class="price">₹${item.price}</div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += menuItemHtml;
+                });
+            });
+        }
+    </script>
+</body>
+</html>
